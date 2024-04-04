@@ -6,6 +6,7 @@ composer require laravel/prompts
 php artisan make:command MessageSentCommand
 
 ## revisar .env
+cambiar de DB_CONNECTION=sqlite a DB_CONNECTION=mysql
 si no esta esto BROADCAST_DRIVER=reverb, solo se debe agregar
 
 ## agregar en el view.blade.php
@@ -27,6 +28,9 @@ php artisan queue:listen
 
 ## prueba de websocket
 php artisan send:message
+
+## crea todos los recursos
+php artisan make:model ModelChat -a 
 
 #documentacion
 https://redberry.international/laravel-reverb-real-time-communication/

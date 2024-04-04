@@ -6,6 +6,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use function Laravel\Prompts\text;
 use App\Events\MessageSent;
+use App\Http\Controllers\ModelChatController as MCC;
+
 class MessageSentCommand extends Command
 {
     /**
@@ -42,6 +44,8 @@ class MessageSentCommand extends Command
             'date' => $date, 
             'message' => $message
         ];
+        $r = new MCC();
+        $o = $r->createCommand($data);
         // dd($data);
         MessageSent::dispatch($data);
     }
