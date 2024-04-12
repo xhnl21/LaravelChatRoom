@@ -1,0 +1,7 @@
+{
+  "name": "chats",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

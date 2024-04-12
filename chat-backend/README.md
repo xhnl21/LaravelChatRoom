@@ -4,6 +4,10 @@ php artisan install:broadcasting
 php artisan make:event MessageSent
 composer require laravel/prompts
 php artisan make:command MessageSentCommand
+php artisan migrate
+
+## descargar los recursos para usar api
+php artisan install:api
 
 ## revisar .env
 cambiar de DB_CONNECTION=sqlite a DB_CONNECTION=mysql
@@ -29,8 +33,13 @@ php artisan queue:listen
 ## prueba de websocket
 php artisan send:message
 
+
+` 
 ## crea todos los recursos
 php artisan make:model ModelChat -a 
+
+## Creando middleware para CORS
+php artisan make:middleware Cors
 
 #documentacion
 https://redberry.international/laravel-reverb-real-time-communication/

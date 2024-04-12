@@ -29,24 +29,29 @@ class MessageSentCommand extends Command
      */
     public function handle()
     {
+        $r = new MCC();
+        $dat = $r->getUser();
+
         $id = random_int(1, 100);
         $fromName = "Xavier";
         $subject = "Solo Leveling";
+        date_default_timezone_set('America/Caracas');
         $date = Carbon::now()->format('g:i A');
         $message = text(
             label:'What is your message?',
             required: true
         );
         $data = [
-            'id' => $id, 
-            'fromName' => $fromName, 
+            'user_id' => $dat->id,
+            'fromName' => $fromName,
             'subject' => $subject, 
             'date' => $date, 
             'message' => $message
         ];
-        $r = new MCC();
+        
         $o = $r->createCommand($data);
-        // dd($data);
+        $data['id'] = $o;
+        $data['fromName'] = $dat->name;
         MessageSent::dispatch($data);
     }
 }

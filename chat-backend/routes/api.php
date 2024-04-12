@@ -1,16 +1,16 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\http\Request;
 use App\Http\Controllers\ModelChatController;
 
-Route::get('/', function () {
-    dump("demo");
-    return view('welcome');
+Route::get('/user', function () {
+    return dd('demo');
+})->middleware('auth:sanctum');
+
+Route::get('/users', function () {
+    return dd('demo');
 });
 
-Route::get('/demo', function () {
-   return view('welcome');
-});
-
-Route::get('/chatDetails', [ModelChatController::class, 'show']);
+Route::get('/chatDetails/{id}', [ModelChatController::class, 'indexCommand']);
+Route::post('/form', [ModelChatController::class, 'create']);

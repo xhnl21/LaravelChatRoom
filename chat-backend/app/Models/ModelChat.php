@@ -15,7 +15,7 @@ class ModelChat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'fromName',
+        'user_id',
         'subject',
         'date',
         'message',
