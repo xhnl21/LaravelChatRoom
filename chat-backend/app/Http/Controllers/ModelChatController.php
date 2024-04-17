@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModelChat;
-use App\Models\User;
 use App\Http\Requests\StoreModelChatRequest;
 use App\Http\Requests\UpdateModelChatRequest;
+use App\Models\User;
+use App\Events\MessageSent;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class ModelChatController extends Controller
@@ -55,15 +57,44 @@ class ModelChatController extends Controller
         ], 200);
     }
 
+    public function indexRoom($id = 0)
+    {  
+        $array = [];      
+        if ($id != 0) {
+            $data = ModelChat::where('user_id', $id)->get();
+        } else {
+            $data = ModelChat::all();
+        }
+        
+        foreach ($data as $key => $val) {               
+            $dat = $this->getUser($val->user_id);
+            $val->fromName = $dat->name;
+            $array[$key]["id"] = $val->id;
+            $array[$key]["user_id"] = $val->user_id;
+            $array[$key]["fromName"] = $val->fromName;
+            $array[$key]["subject"] = $val->subject;
+            $array[$key]["date"] = $val->date;
+            $array[$key]["message"] = $val->message;
+            $array[$key]["created_at"] = $val->created_at;
+            $array[$key]["updated_at"] = $val->updated_at;
+        }
+        return response()->json([
+            'status' => true,
+            'data' => $array
+        ], 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
+        // dd($request->all());
         $send = [
             'name' => $request->name,
             'email' => $request->email, 
         ];
+        // dd($send);
         $data = User::where('email', $request->email)->get();
         if (count($data) == 0) {
             $password = random_int(1, 100);
@@ -78,6 +109,7 @@ class ModelChatController extends Controller
             $id = $data[0]->id;
         }
         $send['user_id'] = $id;
+        $send['name'] = $data[0]->name;
         return response()->json([
             'status' => true,
             'data' => $send
@@ -111,6 +143,28 @@ class ModelChatController extends Controller
        return $lastId->id;
     }
 
+    public function sendSMS(Request $request)
+    {
+        date_default_timezone_set('America/Caracas');
+        $date = Carbon::now()->format('g:i A');
+        $send = [
+            'user_id' => $request->user_id,
+            'subject' => $request->subject, 
+            'date' => $date,
+            'message' => $request->message, 
+        ];
+
+        $dat = ModelChat::create($send);
+
+        $send['id'] = $dat->id;
+        $send['fromName'] = $request->fromName;
+        MessageSent::dispatch($send);
+        
+        return response()->json([
+            'status' => true,
+            'data' => $send
+        ], 200);
+    }
     /**
      * Store a newly created resource in storage.
      */

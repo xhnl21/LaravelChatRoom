@@ -49,11 +49,12 @@ export default defineComponent({
             const urlUser = window.getters.apis.User.createUser();
             window.master
                 .post(urlUser, this.data)
-                .then((response: any) => {
-                    // console.log(response.data.status);
+                .then(async (response: any) => {
+                    // console.log(response.data.data);
                     if (response.data.status) {
+                        await window.database.preferencesSaveUP('user', response.data.data);
                         this.errorMsj("Ingresando espere...");
-                        this.$router.push({ path: "inbox" });
+                        this.$router.push({ path: "room" });
                     } else {
                         this.errorMsj("Error...");
                     }

@@ -9,10 +9,10 @@ Route::get('/', function () {
 });
 
 // Route::get('/index', [ModelChatController::class, 'indexCommand']);
-Route::group(['middleware' => ['cors']], function () {
-    //Rutas a las que se permitirá acceso
-    Route::get('/index', [ModelChatController::class, 'indexCommand']);
-});
+// Route::group(['middleware' => ['cors']], function () {
+//     //Rutas a las que se permitirá acceso
+//     Route::get('/index', [ModelChatController::class, 'indexCommand']);
+// });
 
 
 

@@ -5,7 +5,7 @@ import store from "./store";
 import { IonicVue } from '@ionic/vue';
 import method from './libGlobal/method';
 import "./config/axiosApi";
-// import database from './database/index';
+import database from './database/index';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
 
@@ -54,9 +54,11 @@ declare global {
     Echo: any;
     urlmaster: any;
     master: any;
+    mastera: any;
+    masterb: any;
   }
 }
-// window.database = database.methods;
+window.database = database.methods;
 window.methods = method.methods;
 window.getters = store.getters;
 window.store = store;

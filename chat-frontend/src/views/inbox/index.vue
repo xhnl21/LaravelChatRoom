@@ -30,16 +30,22 @@ export default defineComponent({
         }
     },
     created() {
-        const urlUser = window.getters.apis.User.getUser();
-        const url = urlUser + 'chatDetails/' + 0
-        window.master
-            .get(url)
-            .then((response: any) => {
-                // console.log(response.data.data);
-                this.messages = response.data.data;
-            })
+        this.init();
     },
-    methods: {},
+    methods: {
+        async init() {
+            // const rs = await window.database.getPreferences('user', this.closet);
+            // const id = rs[0].user_id;
+            const urlUser = window.getters.apis.User.getUser();
+            const url = urlUser + 'chatDetails/' + 0
+            window.master
+                .get(url)
+                .then((response: any) => {
+                    console.log(response.data.data);
+                    this.messages = response.data.data;
+                })
+        },
+    },
     computed: {
         ...mapGetters(["GetChat"])
     },

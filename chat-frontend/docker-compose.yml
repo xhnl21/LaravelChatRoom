@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    ports:
+      - 8081:8081
+    volumes:
+      - ./src:/app/src
+    environment:
+      - NODE_ENV=production
+    command: bash -c "npm run dev"
+    # command: bash -c "npm run preview"

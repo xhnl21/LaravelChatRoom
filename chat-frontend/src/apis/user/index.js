@@ -12,6 +12,9 @@ export default {
     createUser() {
         return 'form';
     },
+    sendSMS() {
+        return 'sendSMS';
+    },
     updateUser(id) {
         return base + '/' + id;
     },

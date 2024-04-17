@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+     "furion": "vue-tsc && vite build && vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
     "lint": "eslint ."
@@ -16,6 +17,7 @@
     "@capacitor/core": "5.7.4",
     "@capacitor/haptics": "5.0.7",
     "@capacitor/keyboard": "5.0.8",
+    "@capacitor/preferences": "^5.0.7",
     "@capacitor/status-bar": "5.0.7",
     "@ionic/vue": "^7.0.0",
     "@ionic/vue-router": "^7.0.0",

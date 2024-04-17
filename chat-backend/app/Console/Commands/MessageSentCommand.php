@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use function Laravel\Prompts\text;
 use App\Events\MessageSent;
 use App\Http\Controllers\ModelChatController as MCC;

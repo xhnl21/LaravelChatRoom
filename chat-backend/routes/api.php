@@ -14,3 +14,4 @@ Route::get('/users', function () {
 
 Route::get('/chatDetails/{id}', [ModelChatController::class, 'indexCommand']);
 Route::post('/form', [ModelChatController::class, 'create']);
+Route::post('/sendSMS', [ModelChatController::class, 'sendSMS']);
